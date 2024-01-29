@@ -76,7 +76,7 @@ function App() {
         fila.us_phone = formatPhoneNumber(fila.us_phone)
         console.log(fila.us_phone)
 
-        // await sendMessage({ phone: fila.us_phone, message })
+        await sendMessage({ phone: fila.us_phone, message })
         await saveData(fila)
       }
 
