@@ -76,7 +76,7 @@ function App() {
         fila.us_phone = formatPhoneNumber(fila.us_phone)
         console.log(fila.us_phone)
 
-        await sendMessage({ phone: fila.us_phone, message })
+        // await sendMessage({ phone: fila.us_phone, message })
         await saveData(fila)
       }
 
@@ -101,27 +101,35 @@ function App() {
   }
 
   const sendMessage = async ({ phone, message }) => {
-    const response = await fetch('http://localhost:3001/lead', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        phone,
-        message,
-      }),
-    })
+    // const response = await fetch('http://localhost:3001/lead', {
+    const response = await fetch(
+      'https://botapiisla-production.up.railway.app/send-message-bot',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          phone,
+          message,
+        }),
+      }
+    )
     return response
   }
   const saveData = async (item) => {
     setSend(true)
-    const data = await fetch('http://localhost:3007/api/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(item),
-    })
+    // const data = await fetch('http://localhost:3007/api/send', {
+    const data = await fetch(
+      'https://apiisla-production.up.railway.app/api/send',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      }
+    )
     setSend(false)
     return data
     // console.log(response)
